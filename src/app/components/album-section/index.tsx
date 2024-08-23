@@ -13,7 +13,10 @@ export const AlbumSection: FC = () => {
       y: 0,
       duration: 1,
       stagger: 0.3,
-      scrollTrigger: { trigger: ".album-section", start: "top 80%" },
+      scrollTrigger: {
+        trigger: ".album-section .scroll-appear",
+        start: "top 80%",
+      },
     });
   });
   return (
