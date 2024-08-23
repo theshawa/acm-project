@@ -5,6 +5,11 @@ import gsap from "gsap";
 import { FC } from "react";
 import slide1Img from "./s1.png";
 import slide2Img from "./s2.png";
+import slide3Img from "./s3.png";
+import slide4Img from "./s4.png";
+import slide5Img from "./s5.png";
+import slide6Img from "./s6.png";
+
 import { Slide } from "./slide";
 export const PersonalLifeSection: FC = () => {
   useGSAP(() => {
@@ -46,10 +51,10 @@ export const PersonalLifeSection: FC = () => {
         <div className="flex flex-col space-y-10 lg:max-w-[40vw] ml-auto mr-auto lg:mr-0 max-w-lg w-full mt-20 lg:mt-0 lg:pt-[50vh]">
           <Slide image={slide1Img} />
           <Slide image={slide2Img} />
-          <Slide image={slide1Img} />
-          <Slide image={slide2Img} />
-          <Slide image={slide1Img} />
-          <Slide image={slide2Img} />
+          <Slide image={slide3Img} />
+          <Slide image={slide4Img} />
+          <Slide image={slide5Img} />
+          <Slide image={slide6Img} />
         </div>
       </div>
     </section>
