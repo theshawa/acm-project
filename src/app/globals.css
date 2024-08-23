@@ -3,31 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  @apply bg-stone-50 text-stone-950 text-base font-roboto-condensed;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.page-space-x {
+  @apply px-5 w-full max-w-screen-xl mx-auto;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+h1 {
+  @apply text-5xl md:text-6xl font-anton uppercase;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+p {
+  @apply text-stone-700 leading-normal;
+}
+
+.btn {
+  @apply bg-orange-600 border active:bg-orange-800 border-orange-700 hover:bg-orange-700 transition-colors duration-300 ease-in-out rounded-sm text-base uppercase font-semibold font-antonio tracking-wide text-stone-50 px-5 h-12 flex items-center w-max max-w-full;
 }
