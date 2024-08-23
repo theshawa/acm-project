@@ -66,7 +66,7 @@ export const HeroSection: FC = () => {
           <h2 className="mt-16 font-antonio text-xl md:text-2xl opacity-0 translate-y-[20px]">
             So why does everyone mock him?
           </h2>
-          <Link href="/about" className="btn mt-5 opacity-0 translate-y-[20px]">
+          <Link href="#" className="btn mt-5 opacity-0 translate-y-[20px]">
             Discover More
           </Link>
         </div>
