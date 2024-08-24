@@ -16,7 +16,7 @@ const config: Config = {
       stone: colors.stone,
       orange: colors.orange,
     },
-    extend: {},
+    extend: { animation: { "spin-slow": "spin 10s linear infinite" } },
   },
   plugins: [],
 };

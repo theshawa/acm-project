@@ -2,7 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import slide1Img from "./s1.png";
 import slide2Img from "./s2.png";
 import slide3Img from "./s3.png";
@@ -12,22 +12,29 @@ import slide6Img from "./s6.png";
 
 import { Slide } from "./slide";
 export const PersonalLifeSection: FC = () => {
-  useGSAP(() => {
-    gsap.to(".personal-life-section .scroll-appear *", {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      stagger: 0.3,
-      scrollTrigger: {
-        trigger: ".personal-life-section h1",
-        start: "top 80%",
-      },
-    });
-  });
+  const container = useRef<HTMLDivElement>(null);
+  useGSAP(
+    () => {
+      gsap.to(".scroll-appear *", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: "h1",
+          start: "top 80%",
+        },
+      });
+    },
+    { scope: container }
+  );
   return (
-    <section className="py-[10vh] lg:py-[20vh] mt-20 md:mt-32 bg-stone-950 text-stone-50 rounded-t-xl personal-life-section">
+    <section
+      ref={container}
+      className="py-[10vh] md:py-[16vh] mt-20 md:mt-32 bg-stone-950 text-stone-50 rounded-t-xl"
+    >
       <div className="flex flex-col lg:flex-row page-space-x">
-        <div className="flex flex-col w-full lg:max-w-[30vw] lg:sticky top-[20vh] h-max max-w-lg mx-auto lg:mx-0 scroll-appear">
+        <div className="flex flex-col w-full lg:max-w-[40vw] lg:sticky lg:top-[16vh] h-max mx-auto lg:mx-0 scroll-appear">
           <h1 className="opacity-0 translate-y-5">Personal Life</h1>
           <p className="mt-10 text-stone-300 opacity-0 translate-y-5">
             In addition to his musical career, Sting has been active in human

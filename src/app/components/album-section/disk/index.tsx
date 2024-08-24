@@ -1,19 +1,35 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import coverImage from "./cover.jpg";
 export const Disk: FC = () => {
-  useGSAP(() => {
-    gsap.to(".disk", {
-      rotate: 360,
-      duration: 1,
-      stagger: 0.3,
-      scrollTrigger: { trigger: ".album-section", start: "top 80%", scrub: 1 },
-    });
-  });
+  const disk = useRef<HTMLDivElement>(null);
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        disk.current,
+        {
+          rotate: 60,
+        },
+        {
+          rotate: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: disk.current,
+            start: "top 80%",
+            scrub: 1,
+          },
+        }
+      );
+    },
+    { scope: disk }
+  );
   return (
-    <div className="rounded-full w-[120vw] sm:-right-[20%] sm:ml-auto disk md:w-[70vw] aspect-square relative overflow-hidden flex items-center justify-center">
+    <div
+      ref={disk}
+      className="rounded-full w-[120vw] sm:-right-[20%] sm:ml-auto disk md:w-[70vw] aspect-square relative overflow-hidden flex items-center justify-center"
+    >
       <Image
         alt="Cover Image"
         src={coverImage}

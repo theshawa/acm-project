@@ -3,71 +3,77 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import coverImage from "./cover.png";
 
 export const SpiritSection: FC = () => {
-  useGSAP(() => {
-    const mm = gsap.matchMedia();
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".spirit-section .scroll-appear-box",
-          start: "top 80%",
-        },
-      })
-      .to(".spirit-section .scroll-appear-box", {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.3,
-      })
-      .to(
-        ".spirit-section .scroll-appear-box *",
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.3,
-        },
-        "-=0.5"
-      );
-    mm.add("screen and (min-width: 1024px)", () => {
+  const container = useRef<HTMLDivElement>(null);
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
       gsap
         .timeline({
           scrollTrigger: {
-            trigger: ".spirit-section .scroll-appear-box",
+            trigger: ".scroll-appear-box",
             start: "top 80%",
           },
         })
-        .to(".spirit-image", {
+        .to(".scroll-appear-box", {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+        })
+        .to(
+          ".scroll-appear-box *",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.3,
+          },
+          "-=0.5"
+        );
+      mm.add("screen and (min-width: 1024px)", () => {
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: ".scroll-appear-box",
+              start: "top 80%",
+            },
+          })
+          .to(".animate-image", {
+            opacity: 1,
+            duration: 1,
+          })
+          .to(".animate-image", {
+            y: -100,
+            duration: 1,
+            scrollTrigger: {
+              trigger: ".animate-image",
+              start: "top 80%",
+              scrub: 1,
+            },
+          });
+      });
+      mm.add("screen and (max-width: 1023px)", () => {
+        gsap.to(".animate-image", {
           opacity: 1,
           duration: 1,
-        })
-        .to(".spirit-image", {
-          y: -100,
-          duration: 1,
           scrollTrigger: {
-            trigger: ".spirit-section .scroll-appear-box",
+            trigger: ".animate-image",
             start: "top 80%",
-            scrub: 1,
           },
         });
-    });
-    mm.add("screen and (max-width: 1023px)", () => {
-      gsap.to(".spirit-image", {
-        opacity: 1,
-        duration: 1,
-        scrollTrigger: {
-          trigger: ".spirit-section .scroll-appear-box",
-          start: "top 80%",
-        },
       });
-    });
-  });
+    },
+    { scope: container }
+  );
   return (
-    <section className="page-space-x pt-20 md:pt-32 flex flex-col items-center text-center spirit-section">
-      <div className="flex flex-col items-center w-full max-w-xl bg-stone-200/90 backdrop-blur-sm px-5 md:px-20 py-10 md:py-20 relative z-10 scroll-appear-box">
+    <section
+      ref={container}
+      className="page-space-x pt-20 md:pt-32 flex flex-col items-center text-center"
+    >
+      <div className="flex flex-col items-center w-full max-w-xl bg-stone-200/90 backdrop-blur-sm px-5 md:px-20 py-10 md:py-20 relative z-10 scroll-appear-box opacity-0 translate-y-5">
         <svg
           width="53"
           height="34"
@@ -98,7 +104,7 @@ export const SpiritSection: FC = () => {
       <Image
         src={coverImage}
         alt="Cover Image"
-        className="object-cover mt-10 md:mt-0 md:-top-[20vh] relative spirit-image"
+        className="object-cover mt-10 md:mt-0 md:-top-[20vh] relative animate-image"
         width={1020}
         height={726}
         quality={100}

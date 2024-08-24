@@ -11,7 +11,6 @@ export const Slide: FC<{ image: StaticImageData }> = ({ image }) => {
       height={533}
       quality={100}
       placeholder="blur"
-      priority
     ></Image>
   );
 };

@@ -3,24 +3,31 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { Disk } from "./disk";
 
 export const AlbumSection: FC = () => {
-  useGSAP(() => {
-    gsap.to(".album-section .scroll-appear *", {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      stagger: 0.3,
-      scrollTrigger: {
-        trigger: ".album-section .scroll-appear",
-        start: "top 80%",
-      },
-    });
-  });
+  const container = useRef<HTMLDivElement>(null);
+  useGSAP(
+    () => {
+      gsap.to(".scroll-appear *", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: ".scroll-appear",
+          start: "top 80%",
+        },
+      });
+    },
+    { scope: container }
+  );
   return (
-    <section className="pt-20 lg:pt-0 relative overflow-hidden md:-top-[20vh] flex flex-col lg:flex-row album-section">
+    <section
+      ref={container}
+      className="pt-20 lg:pt-0 relative overflow-hidden md:-top-[20vh] flex flex-col lg:flex-row"
+    >
       <div className="flex flex-col lg:flex-row page-space-x items-center md:items-start xl:items-center">
         <div className="flex flex-col max-w-lg lg:max-w-none lg:w-[30vw] mb-10 md:mb-0 scroll-appear">
           <h1 className="opacity-0 translate-y-5">THE LAST SHIP</h1>

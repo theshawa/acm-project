@@ -5,77 +5,81 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import coverImage from "./cover.png";
 export const LegendSection: FC = () => {
-  useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const mm = gsap.matchMedia();
-    gsap.to(".legend-section .scroll-appear-text *", {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      stagger: 0.3,
-      scrollTrigger: { trigger: ".legend-section", start: "top 80%" },
-    });
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".legend-section .scroll-appear-box",
-          start: "top 80%",
-        },
-      })
-      .to(".legend-section .scroll-appear-box", {
+  const container = useRef<HTMLDivElement>(null);
+  useGSAP(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
+      const mm = gsap.matchMedia();
+      gsap.to(".scroll-appear-text *", {
         opacity: 1,
         y: 0,
         duration: 1,
         stagger: 0.3,
-      })
-      .to(
-        ".legend-section .scroll-appear-box *",
-        {
+        scrollTrigger: { trigger: ".scroll-appear-text", start: "top 80%" },
+      });
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".scroll-appear-box",
+            start: "top 80%",
+          },
+        })
+        .to(".scroll-appear-box", {
           opacity: 1,
           y: 0,
           duration: 1,
           stagger: 0.3,
-        },
-        "-=0.5"
-      );
-    mm.add("screen and (min-width: 1024px)", () => {
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".legend-section .scroll-appear-box",
-            start: "top 80%",
-          },
         })
-        .to(".legend-image", {
+        .to(
+          ".scroll-appear-box *",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.3,
+          },
+          "-=0.5"
+        );
+      mm.add("screen and (min-width: 1024px)", () => {
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: ".scroll-appear-box",
+              start: "top 80%",
+            },
+          })
+          .to(".animate-image", {
+            opacity: 1,
+            duration: 1,
+          })
+          .to(".animate-image", {
+            y: -100,
+            duration: 1,
+            scrollTrigger: {
+              trigger: ".scroll-appear-box",
+              start: "top 80%",
+              scrub: 1,
+            },
+          });
+      });
+      mm.add("screen and (max-width: 1023px)", () => {
+        gsap.to(".animate-image", {
           opacity: 1,
           duration: 1,
-        })
-        .to(".legend-image", {
-          y: -100,
-          duration: 1,
           scrollTrigger: {
-            trigger: ".legend-section .scroll-appear-box",
+            trigger: ".scroll-appear-box",
             start: "top 80%",
-            scrub: 1,
           },
         });
-    });
-    mm.add("screen and (max-width: 1023px)", () => {
-      gsap.to(".legend-image", {
-        opacity: 1,
-        duration: 1,
-        scrollTrigger: {
-          trigger: ".legend-section .scroll-appear-box",
-          start: "top 80%",
-        },
       });
-    });
-  });
+    },
+    { scope: container }
+  );
   return (
-    <section className="page-space-x pt-20 md:pt-32 legend-section">
+    <section ref={container} className="page-space-x pt-20 md:pt-32">
       <div className="flex flex-col lg:flex-row relative z-10">
         <div className="flex flex-col scroll-appear-text">
           <h1 className="opacity-0 translate-y-5">The Legend</h1>
@@ -114,7 +118,7 @@ export const LegendSection: FC = () => {
         width={750}
         height={750}
         quality={100}
-        className="w-full md:w-[60vw] opacity-0 legend-image xl:w-[40vw] h-auto object-cover object-center lg:ml-auto lg:mr-[20vw] mt-10 lg:mt-0 relative md:-top-[30vh] xl:-top-[40vh]"
+        className="w-full md:w-[60vw] opacity-0 animate-image xl:w-[40vw] h-auto object-cover object-center lg:ml-auto lg:mr-[20vw] mt-10 lg:mt-0 relative md:-top-[30vh] xl:-top-[40vh]"
         placeholder="blur"
       />
     </section>
