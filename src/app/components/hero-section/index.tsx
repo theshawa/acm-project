@@ -85,12 +85,23 @@ export const HeroSection: FC = () => {
             onClick={() => {
               lenis?.scrollTo(window.innerHeight * 0.7);
             }}
-            className="size-20 flex items-center justify-center group hover:text-stone-400 transition-colors active:scale-90 duration-300 ease-in-out text-stone-500 relative mt-20 text-xs uppercase text-center opacity-0 translate-y-5"
+            className="size-16 flex items-center justify-center group transition-colors active:scale-90 duration-300 ease-in-out text-stone-400 relative mt-20 text-xs uppercase text-center opacity-0 translate-y-5"
           >
-            <div className="absolute w-full h-full rounded-full border group-hover:border-stone-700 transition-colors duration-300 ease-in-out border-dashed border-stone-800 animate-spin-slow"></div>
+            <div className="absolute w-full h-full rounded-full border-2 group-hover:border-stone-400 transition-colors duration-300 ease-in-out border-dashed border-stone-700 animate-spin-slow"></div>
             <span>
-              SCROLL
-              <br /> DOWN
+              <svg
+                width="8"
+                height="28"
+                viewBox="0 0 8 28"
+                className="size-8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.64645 27.3536C3.84171 27.5488 4.15829 27.5488 4.35355 27.3536L7.53553 24.1716C7.7308 23.9763 7.7308 23.6597 7.53553 23.4645C7.34027 23.2692 7.02369 23.2692 6.82843 23.4645L4 26.2929L1.17157 23.4645C0.976312 23.2692 0.659729 23.2692 0.464467 23.4645C0.269205 23.6597 0.269205 23.9763 0.464467 24.1716L3.64645 27.3536ZM3.5 2.18557e-08L3.5 27L4.5 27L4.5 -2.18557e-08L3.5 2.18557e-08Z"
+                  fill="currentColor"
+                />
+              </svg>
             </span>
           </button>
         </div>
